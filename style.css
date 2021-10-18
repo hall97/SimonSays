@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Fira Sans";
+  color: ghostwhite;
+  background-color: dimgray;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  padding-top: 2rem;
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: 200;
+  text-align: center;
+}
+
+/* Main */
+.app {
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    "a a a"
+    "b c d"
+    "e f g";
+}
+
+.command--display {
+  font-size: 3rem;
+  color: darkslategrey;
+  background-color: azure;
+  grid-area: a;
+  margin: 1rem;
+  padding: 5rem, 0, 1rem, 2rem;
+  align-content: flex-end;
+  border-radius: 1rem;
+}
+
+/* Game tiles */
+.tile {
+  display: flex;
+  align-items: stretch;
+  font-size: 3rem;
+  margin: 1.5rem;
+  padding: 1rem 1rem;
+  border-radius: 2rem;
+  text-indent: 7.5rem;
+}
+
+.tile--red {
+  grid-area: b;
+  background-color: red;
+}
+
+.tile--blue {
+  grid-area: c;
+  background-color: blue;
+}
+
+.tile--yellow {
+  grid-area: d;
+  background-color: gold;
+}
+
+.tile--purple {
+  grid-area: e;
+  background-color: purple;
+}
+
+.tile--pink {
+  grid-area: f;
+  background-color: pink;
+}
+
+.tile--brown {
+  grid-area: g;
+  background-color: brown;
+}
