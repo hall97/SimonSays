@@ -9,11 +9,14 @@ const tileFour = document.querySelector('.tile--pink');
 const tileFive = document.querySelector('.tile--brown');
 
 const command = document.querySelector('.command--display');
+const reset = document.querySelector('.reset');
 
 // Variables
 let sequence = [];
 let userSeq = [];
+
 const tileNumberToColour = ['Red', 'Blue', 'Yellow', 'Purple', 'Pink', 'Brown'];
+const winLen = 6;
 
 // Functions \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 //////////////////////////////////////////////////
@@ -27,12 +30,20 @@ const seqDisplay = function () {
     if (count === sequence.length) {
       command.textContent = 'Enter the sequence using the buttons';
       clearInterval(timer);
+    } else {
+      command.textContent = tileNumberToColour[Number(sequence[count])];
+      count++;
     }
-    command.textContent = tileNumberToColour[Number(sequence[count])];
-    count++;
   }, 1000);
 };
 seqDisplay();
+
+const startAgain = function () {
+  sequence = [];
+  userSeq = [];
+  nextSeqEl();
+  seqDisplay();
+};
 
 // Check sequeunce and if complete starts next round or restarts game when wrong.
 const seqCheck = function () {
@@ -40,20 +51,26 @@ const seqCheck = function () {
     userSeq.length === sequence.length &&
     userSeq.join('') === sequence.join('')
   ) {
-    command.textContent = 'Sequence correct!';
-    nextSeqEl();
-    setTimeout(seqDisplay, 1000);
-  }
-  if (userSeq.length === sequence.length && userSeq !== sequence)
+    if (userSeq.length === winLen) {
+      command.textContent = 'Well done! You beat Simon! 🏆';
+    } else {
+      command.textContent = 'Sequence correct!';
+      nextSeqEl();
+      userSeq = [];
+      setTimeout(seqDisplay, 1000);
+    }
+  } else if (userSeq.length === sequence.length && userSeq !== sequence) {
     command.textContent = 'Incorrect, try again';
-  sequence = [];
-  userSeq = [];
+    startAgain();
+  }
 };
 
 // Event handlers
 tileZero.addEventListener('click', function () {
+  // if () {
   userSeq.push(0);
   seqCheck();
+  // }
 });
 
 tileOne.addEventListener('click', function () {
@@ -80,3 +97,5 @@ tileFive.addEventListener('click', function () {
   userSeq.push(5);
   seqCheck();
 });
+
+reset.addEventListener('click', startAgain);
