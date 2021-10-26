@@ -14,6 +14,7 @@ const reset = document.querySelector('.reset');
 // Variables
 let sequence = [];
 let userSeq = [];
+let active = false; // Disables event handlers while seq is displaying
 
 const tileNumberToColour = ['Red', 'Blue', 'Yellow', 'Purple', 'Pink', 'Brown'];
 const winLen = 6;
@@ -29,9 +30,14 @@ const seqDisplay = function () {
   const timer = setInterval(function () {
     if (count === sequence.length) {
       command.textContent = 'Enter the sequence using the buttons';
+      active = true;
       clearInterval(timer);
     } else {
       command.textContent = tileNumberToColour[Number(sequence[count])];
+      // Flashes dashes so that repeating colours can be distingushed easily.
+      setTimeout(function () {
+        command.textContent = '  ---- ';
+      }, 750);
       count++;
     }
   }, 1000);
@@ -42,6 +48,7 @@ const startAgain = function () {
   sequence = [];
   userSeq = [];
   nextSeqEl();
+  active = false;
   seqDisplay();
 };
 
@@ -57,6 +64,7 @@ const seqCheck = function () {
       command.textContent = 'Sequence correct!';
       nextSeqEl();
       userSeq = [];
+      active = false;
       setTimeout(seqDisplay, 1000);
     }
   } else if (userSeq.length === sequence.length && userSeq !== sequence) {
@@ -67,33 +75,37 @@ const seqCheck = function () {
 
 // Event handlers
 tileZero.addEventListener('click', function () {
-  // if () {
+  if (!active) return;
   userSeq.push(0);
   seqCheck();
-  // }
 });
 
 tileOne.addEventListener('click', function () {
+  if (!active) return;
   userSeq.push(1);
   seqCheck();
 });
 
 tileTwo.addEventListener('click', function () {
+  if (!active) return;
   userSeq.push(2);
   seqCheck();
 });
 
 tileThree.addEventListener('click', function () {
+  if (!active) return;
   userSeq.push(3);
   seqCheck();
 });
 
 tileFour.addEventListener('click', function () {
+  if (!active) return;
   userSeq.push(4);
   seqCheck();
 });
 
 tileFive.addEventListener('click', function () {
+  if (!active) return;
   userSeq.push(5);
   seqCheck();
 });

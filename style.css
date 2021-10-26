@@ -17,10 +17,10 @@ body {
 
 header {
   display: flex;
-  justify-content: center;
-
+  justify-content: space-around;
   padding: 0 2rem;
   padding-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .title {
@@ -40,7 +40,7 @@ header {
 .app {
   display: grid;
   grid-template-columns: repeat(3, 2fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: 1fr, repeat(2, 1fr);
   grid-template-areas:
     'a a a'
     'b c d'
@@ -54,18 +54,22 @@ header {
   grid-area: a;
   margin: 1rem;
   padding: 5rem, 0, 1rem, 2rem;
-  align-content: flex-end;
+  width: 100%;
+  height: auto;
   border-radius: 1rem;
+  text-align: center;
 }
 
 /* Game tiles */
 .tile {
-  display: flex;
+  width: 100%;
+  display: block;
   align-items: stretch;
   font-size: 3rem;
-  margin: 1.5rem;
-  padding: 1rem 1rem;
-  border-radius: 2rem;
+  margin: 1.5rem 1.5rem 0rem 1.5rem;
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+  border-radius: 3rem;
+
   color: azure;
 }
 
